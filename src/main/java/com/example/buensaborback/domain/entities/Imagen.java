@@ -1,18 +1,17 @@
 package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@ToString
+@Builder
 public class Imagen extends Base{
 
-    private String denominacion;
+    private String url;
     
 }
