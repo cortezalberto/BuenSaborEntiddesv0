@@ -4,10 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +14,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@ToString
+@Builder
 public class Cliente extends Base{
 
     private String nombre;
@@ -27,10 +26,13 @@ public class Cliente extends Base{
     @OneToOne
     private Usuario usuario;
 
+
+    @OneToMany
     //SE AGREGA EL JOIN COLUMN PARA QUE JPA NO CREE LA TABLA INTERMEDIA EN UNA RELACION ONE TO MANY
     //DE ESTA MANERA PONE EL FOREIGN KEY 'cliente_id' EN LA TABLA DE LOS MANY
-    @OneToMany
     @JoinColumn(name = "cliente_id")
+    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
+    @Builder.Default
     private Set<Pedido> pedidos = new HashSet<>();
 
 }

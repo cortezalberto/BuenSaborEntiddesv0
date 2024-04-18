@@ -1,10 +1,7 @@
 package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @NoArgsConstructor
@@ -12,6 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@ToString
+@Builder
 public class DetallePedido extends Base{
 
     private Integer cantidad;

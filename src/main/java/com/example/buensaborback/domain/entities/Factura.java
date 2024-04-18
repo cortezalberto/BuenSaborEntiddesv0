@@ -4,10 +4,7 @@ import com.example.buensaborback.domain.entities.enums.FormaPago;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,6 +17,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@ToString
+@Builder
 public class Factura extends Base{
 
     private LocalDate fechaFacturacion;

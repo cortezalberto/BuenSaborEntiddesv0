@@ -2,10 +2,7 @@ package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@ToString
+@Builder
 public class Pais extends Base{
 
     private String nombre;

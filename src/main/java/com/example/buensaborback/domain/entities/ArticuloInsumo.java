@@ -1,10 +1,7 @@
 package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +11,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@ToString
+@Builder
 public class ArticuloInsumo extends Base{
 
     private String denominacion;
@@ -30,5 +29,12 @@ public class ArticuloInsumo extends Base{
     private Imagen imagen;
 
     @ManyToMany(mappedBy = "articulosInsumos")
+    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
+    @Builder.Default
     private Set<Promocion> estaEnPromociones = new HashSet<>();
+
+    @ManyToMany(mappedBy = "articulosInsumos")
+    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
+    @Builder.Default
+    private Set<ArticuloManufacturado> articuloManufacturados = new HashSet<>();
 }
