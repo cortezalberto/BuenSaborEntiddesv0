@@ -32,6 +32,9 @@ public class Pedido extends Base{
     @ManyToOne
     private Domicilio domicilio;
 
+    @ManyToOne
+    private Sucursal sucursal;
+
     @OneToOne
     private Factura factura;
 
