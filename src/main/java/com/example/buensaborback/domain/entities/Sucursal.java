@@ -36,10 +36,11 @@ public class Sucursal extends Base{
     private Set<Categoria> categorias = new HashSet<>();
 
 
-    @OneToMany
-    //SE AGREGA EL JOIN COLUMN PARA QUE JPA NO CREE LA TABLA INTERMEDIA EN UNA RELACION ONE TO MANY
-    //DE ESTA MANERA PONE EL FOREIGN KEY 'sucursal_id' EN LA TABLA DE LOS MANY
-    @JoinColumn(name = "sucursal_id")
+    @ManyToMany
+    //SE AGREGA EL JOIN TABLE PARA QUE JPA CREE LA TABLA INTERMEDIA EN UNA RELACION MANY TO MANY
+    @JoinTable(name = "sucursal_promocion",
+            joinColumns = @JoinColumn(name = "sucursal_id"),
+            inverseJoinColumns = @JoinColumn(name = "promocion_id"))
     //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
     @Builder.Default
     private Set<Promocion> promociones = new HashSet<>();

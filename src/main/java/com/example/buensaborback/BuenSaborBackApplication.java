@@ -1,6 +1,7 @@
 package com.example.buensaborback;
 
 import com.example.buensaborback.domain.entities.*;
+import com.example.buensaborback.domain.entities.enums.TipoPromocion;
 import com.example.buensaborback.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +63,9 @@ public class BuenSaborBackApplication {
 	@Autowired
 	private PromocionRepository promocionRepository;
 
+	@Autowired
+	private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborBackApplication.class, args);
 		logger.info("Estoy activo en el main");
@@ -98,7 +102,7 @@ public class BuenSaborBackApplication {
 			Empresa empresaBrown = Empresa.builder().nombre("Lo de Brown").cuil(30503167).razonSocial("Venta de Alimentos").build();
 			Sucursal sucursalChacras = Sucursal.builder().nombre("En chacras").horarioApertura(LocalTime.of(17,0)).horarioCierre(LocalTime.of(23,0)).build();
 			Sucursal sucursalGodoyCruz = Sucursal.builder().nombre("En godoy cruz").horarioApertura(LocalTime.of(16,0)).horarioCierre(LocalTime.of(23,30)).build();
-			Domicilio domicilioViamonte = Domicilio.builder().cp(5509).calle("Viamonte").numero(500).localidad(localidad1).build();
+			Domicilio domicilioViamonte = Domicilio.builder().cp(5509).calle("Viamonte").numero(500).piso(2).nroDpto(23).localidad(localidad1).build();
 			Domicilio domicilioSanMartin = Domicilio.builder().cp(5511).calle("San Martin").numero(789).localidad(localidad2).build();
 
 			sucursalChacras.setDomicilio(domicilioViamonte);
@@ -150,19 +154,18 @@ public class BuenSaborBackApplication {
 			imagenRepository.save(imagenQueso);
 			imagenRepository.save(imagenTomate);
 
-			cocaCola.setImagen(imagenCoca);
-			harina.setImagen(imagenHarina);
-			queso.setImagen(imagenQueso);
-			tomate.setImagen(imagenTomate);
+			cocaCola.getImagenes().add(imagenCoca);
+			harina.getImagenes().add(imagenHarina);
+			queso.getImagenes().add(imagenQueso);
+			tomate.getImagenes().add(imagenTomate);
 			articuloInsumoRepository.save(cocaCola);
 			articuloInsumoRepository.save(harina);
 			articuloInsumoRepository.save(queso);
 			articuloInsumoRepository.save(tomate);
 
 			// Crear Articulos Manufacturados
-			ArticuloManufacturado pizzaMuzarella = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(130.0).tiempoEstimadoMinutos(15).build();
-			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(150.0).tiempoEstimadoMinutos(15).build();
-
+			ArticuloManufacturado pizzaMuzarella = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(130.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una muzza de toda la vida").build();
+			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").build();
 
 			// Crear fotos para los artículos manufacturados
 			Imagen imagenPizzaMuzarella = Imagen.builder().url("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").build();
@@ -170,22 +173,35 @@ public class BuenSaborBackApplication {
 			imagenRepository.save(imagenPizzaMuzarella);
 			imagenRepository.save(imagenPizzaNapolitana);
 
-			pizzaMuzarella.setImagen(imagenPizzaMuzarella);
-			pizzaNapolitana.setImagen(imagenPizzaNapolitana);
+			pizzaMuzarella.getImagenes().add(imagenPizzaMuzarella);
+			pizzaNapolitana.getImagenes().add(imagenPizzaNapolitana);
+			articuloManufacturadoRepository.save(pizzaMuzarella);
+			articuloManufacturadoRepository.save(pizzaNapolitana);
 
-			// Establcer las relaciones entre estos objetos.
-			pizzaMuzarella.getArticulosInsumos().add(harina);
-			pizzaMuzarella.getArticulosInsumos().add(queso);
-			pizzaNapolitana.getArticulosInsumos().add(harina);
-			pizzaNapolitana.getArticulosInsumos().add(queso);
-			pizzaNapolitana.getArticulosInsumos().add(tomate);
+			// Establecer las relaciones entre estos objetos.
+			ArticuloManufacturadoDetalle detalle1 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(300).build();
+			ArticuloManufacturadoDetalle detalle2 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(600).build();
+			ArticuloManufacturadoDetalle detalle3 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(350).build();
+			ArticuloManufacturadoDetalle detalle4 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(650).build();
+			ArticuloManufacturadoDetalle detalle5 = ArticuloManufacturadoDetalle.builder().articuloInsumo(tomate).cantidad(2).build();
+			articuloManufacturadoDetalleRepository.save(detalle1);
+			articuloManufacturadoDetalleRepository.save(detalle2);
+			articuloManufacturadoDetalleRepository.save(detalle3);
+			articuloManufacturadoDetalleRepository.save(detalle4);
+			articuloManufacturadoDetalleRepository.save(detalle5);
+
+			pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle1);
+			pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle2);
+			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle3);
+			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle4);
+			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle5);
 			articuloManufacturadoRepository.save(pizzaMuzarella);
 			articuloManufacturadoRepository.save(pizzaNapolitana);
 
 			// Establecer relaciones de las categorias
-			categoriaGaseosas.getArticulosInsumos().add(cocaCola);
-			categoriaPizzas.getArticulosManufacturados().add(pizzaMuzarella);
-			categoriaPizzas.getArticulosManufacturados().add(pizzaNapolitana);
+			categoriaGaseosas.getArticulos().add(cocaCola);
+			categoriaPizzas.getArticulos().add(pizzaMuzarella);
+			categoriaPizzas.getArticulos().add(pizzaNapolitana);
 			categoriaRepository.save(categoriaGaseosas);
 			categoriaRepository.save(categoriaPizzas);
 
@@ -196,10 +212,12 @@ public class BuenSaborBackApplication {
 					.fechaHasta(LocalDate.of(2024,2,15))
 					.horaDesde(LocalTime.of(0,0))
 					.horaHasta(LocalTime.of(23,59))
-					.descuento(25.6)
+					.descripcionDescuento("El descuento que se hace por san valentin, un dia antes y un dia despues")
+					.precioPromocional(100.0)
+					.tipoPromocion(TipoPromocion.promocion)
 					.build();
-			promocionDiaEnamorados.getArticulosInsumos().add(cocaCola);
-			promocionDiaEnamorados.getArticuloManufacturados().add(pizzaNapolitana);
+			promocionDiaEnamorados.getArticulos().add(cocaCola);
+			promocionDiaEnamorados.getArticulos().add(pizzaNapolitana);
 			promocionRepository.save(promocionDiaEnamorados);
 
 			//Agregar categorias y promociones a sucursales

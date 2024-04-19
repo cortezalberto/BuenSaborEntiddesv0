@@ -2,6 +2,7 @@ package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,29 +13,21 @@ import java.util.Set;
 @Setter
 @Entity
 @ToString
-@Builder
-public class ArticuloInsumo extends Base{
+@SuperBuilder
+public class ArticuloInsumo extends Articulo {
 
-    private String denominacion;
     private Double precioCompra;
-    private Double precioVenta;
     private Integer stockActual;
     private Integer stockMaximo;
     private Boolean esParaElaborar;
 
-    @ManyToOne
-    private UnidadMedida unidadMedida;
+//    @Builder
+//    public ArticuloInsumo(String denominacion, Double precioVenta, Double precioCompra, Integer stockActual, Integer stockMaximo, Boolean esParaElaborar, UnidadMedida unidadMedida) {
+//        super(denominacion, precioVenta, unidadMedida);
+//        this.precioCompra = precioCompra;
+//        this.stockActual = stockActual;
+//        this.stockMaximo = stockMaximo;
+//        this.esParaElaborar = esParaElaborar;
+//    }
 
-    @OneToOne
-    private Imagen imagen;
-
-    @ManyToMany(mappedBy = "articulosInsumos")
-    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
-    @Builder.Default
-    private Set<Promocion> estaEnPromociones = new HashSet<>();
-
-    @ManyToMany(mappedBy = "articulosInsumos")
-    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
-    @Builder.Default
-    private Set<ArticuloManufacturado> articuloManufacturados = new HashSet<>();
 }

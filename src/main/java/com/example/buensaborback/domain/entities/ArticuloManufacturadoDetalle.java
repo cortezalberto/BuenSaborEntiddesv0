@@ -1,22 +1,22 @@
 package com.example.buensaborback.domain.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
 @ToString
 @Builder
-public class DetallePedido extends Base{
+@Entity
+public class ArticuloManufacturadoDetalle extends Base{
+
 
     private Integer cantidad;
-    private Double subTotal;
 
     @ManyToOne
-    private Articulo articulo;
+    private ArticuloInsumo articuloInsumo;
 
 }
