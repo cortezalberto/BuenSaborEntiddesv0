@@ -1,6 +1,9 @@
 package com.example.buensaborback;
 
 import com.example.buensaborback.domain.entities.*;
+import com.example.buensaborback.domain.entities.enums.Estado;
+import com.example.buensaborback.domain.entities.enums.FormaPago;
+import com.example.buensaborback.domain.entities.enums.TipoEnvio;
 import com.example.buensaborback.domain.entities.enums.TipoPromocion;
 import com.example.buensaborback.repositories.*;
 import org.slf4j.Logger;
@@ -65,6 +68,15 @@ public class BuenSaborBackApplication {
 
 	@Autowired
 	private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
+
+	@Autowired
+	private PedidoRepository pedidoRepository;
+
+	@Autowired
+	private DetallePedidoRepository detallePedidoRepository;
+
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborBackApplication.class, args);
@@ -231,8 +243,45 @@ public class BuenSaborBackApplication {
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
 
-			logger.info("Sucursal Chacras {}",sucursalChacras);
-			logger.info("Sucursal Godoy Cruz {}",sucursalGodoyCruz);
+			//Crea un cliente y un usuario
+			Imagen imagenCliente = Imagen.builder().url("https://hips.hearstapps.com/hmg-prod/images/la-la-land-final-1638446140.jpg").build();
+			imagenRepository.save(imagenCliente);
+			Usuario usuario = Usuario.builder().username("sebastian").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc4a3").build();
+			usuarioRepository.save(usuario);
+			Cliente cliente = Cliente.builder().usuario(usuario)
+					.imagen(imagenCliente)
+					.email("correoFalso@gmail.com")
+					.nombre("Sebastian")
+					.apellido("Wilder")
+					.telefono("2615920825")
+					.build();
+			cliente.getDomicilios().add(domicilioViamonte);
+			clienteRepository.save(cliente);
+
+			//Crea un pedido para el cliente
+			Pedido pedido = Pedido.builder().fechaPedido(LocalDate.now())
+							.horaEstimadaFinalizacion(LocalTime.now())
+							.total(300.0)
+							.totalCosto(170.6)
+					.estado(Estado.Preparacion)
+					.formaPago(FormaPago.MercadoPago)
+					.tipoEnvio(TipoEnvio.Delivery)
+					.sucursal(sucursalChacras)
+					.domicilio(domicilioViamonte).build();
+
+			DetallePedido detallePedido1 = DetallePedido.builder().articulo(pizzaMuzarella).cantidad(1).subTotal(200.0).build();
+			DetallePedido detallePedido2 = DetallePedido.builder().articulo(cocaCola).cantidad(2).subTotal(100.0).build();
+
+			pedido.getDetallePedidos().add(detallePedido1);
+			pedido.getDetallePedidos().add(detallePedido2);
+			pedidoRepository.save(pedido);
+
+			logger.info("----------------Sucursal Chacras ---------------------");
+			logger.info("{}",sucursalChacras);
+			logger.info("----------------Sucursal Godoy Cruz ---------------------");
+			logger.info("{}",sucursalGodoyCruz);
+			logger.info("----------------Pedido ---------------------");
+			logger.info("{}",pedido);
 		};
 	}
 }
