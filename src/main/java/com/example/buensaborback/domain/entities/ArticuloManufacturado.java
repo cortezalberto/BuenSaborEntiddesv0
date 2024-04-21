@@ -30,13 +30,6 @@ public class ArticuloManufacturado extends Articulo {
     @Builder.Default
     private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new HashSet<>();
 
-//    @Builder
-//    public ArticuloManufacturado(String denominacion, Double precioVenta, UnidadMedida unidadMedida, String descripcion, Integer tiempoEstimadoMinutos, String preparacion){
-//        super(denominacion,precioVenta,unidadMedida);
-//        this.descripcion = descripcion;
-//        this.tiempoEstimadoMinutos = tiempoEstimadoMinutos;
-//        this.preparacion = preparacion;
-//        this.articuloManufacturadoDetalles = new HashSet<>();
-//    }
+
 
 }

@@ -276,6 +276,9 @@ public class BuenSaborBackApplication {
 			pedido.getDetallePedidos().add(detallePedido2);
 			pedidoRepository.save(pedido);
 
+			cliente.getPedidos().add(pedido);
+			clienteRepository.save(cliente);
+
 			logger.info("----------------Sucursal Chacras ---------------------");
 			logger.info("{}",sucursalChacras);
 			logger.info("----------------Sucursal Godoy Cruz ---------------------");
