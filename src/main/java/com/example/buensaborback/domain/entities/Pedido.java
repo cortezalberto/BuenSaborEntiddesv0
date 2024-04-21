@@ -17,7 +17,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@ToString
 @Builder
 public class Pedido extends Base{
 
