@@ -23,5 +23,4 @@ public class PromocionDto extends BaseDto{
     private TipoPromocion tipoPromocion;
     private Set<ArticuloDto> articulos = new HashSet<>();
     private Set<ImagenDto> imagenes = new HashSet<>();
-    private Set<SucursalDto> sucursales = new HashSet<>();
 }

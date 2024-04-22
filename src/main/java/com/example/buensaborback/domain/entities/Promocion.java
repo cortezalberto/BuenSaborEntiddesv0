@@ -45,9 +45,4 @@ public class Promocion extends Base {
     @Builder.Default
     private Set<Imagen> imagenes = new HashSet<>();
 
-    @ManyToMany(mappedBy = "promociones")
-    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
-    @Builder.Default
-    private Set<Sucursal> sucursales = new HashSet<>();
-
 }

@@ -23,9 +23,6 @@ public class Sucursal extends Base{
     @OneToOne
     private Domicilio domicilio;
 
-
-
-
     @ManyToMany
     //SE AGREGA EL JOIN TABLE PARA QUE JPA CREE LA TABLA INTERMEDIA EN UNA RELACION MANY TO MANY
     @JoinTable(name = "sucursal_categoria",

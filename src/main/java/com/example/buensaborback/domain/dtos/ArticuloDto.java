@@ -13,7 +13,6 @@ public class ArticuloDto extends BaseDto{
 
     protected String denominacion;
     protected Double precioVenta;
-    private Set<PromocionDto> estaEnPromociones = new HashSet<>();
     private Set<ImagenDto> imagenes = new HashSet<>();
     private UnidadMedidaDto unidadMedida;
 

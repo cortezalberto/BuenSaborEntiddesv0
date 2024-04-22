@@ -9,9 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ISucursalMapper extends IBaseMapper<Sucursal, SucursalDto> {
-    @Mapping(target = "categorias", ignore = true)
-    @Mapping(target = "promociones", ignore = true)
-    @Mapping(target = "domicilio", ignore = true)
+
     SucursalDto toDTO(Sucursal source);
     Sucursal toEntity(SucursalDto source);
     List<SucursalDto> toDTOsList(List<Sucursal> source);

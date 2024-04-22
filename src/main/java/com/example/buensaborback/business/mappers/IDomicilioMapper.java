@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IDomicilioMapper extends IBaseMapper<Domicilio, DomicilioDto> {
-    @Mapping(target = "clientes", ignore = true)
+
+
     DomicilioDto toDTO(Domicilio source);
     Domicilio toEntity(DomicilioDto source);
     List<DomicilioDto> toDTOsList(List<Domicilio> source);

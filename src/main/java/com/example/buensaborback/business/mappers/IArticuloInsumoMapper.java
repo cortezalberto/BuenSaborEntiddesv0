@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface IArticuloInsumoMapper extends IBaseMapper<ArticuloInsumo, ArticuloInsumoDto> {
 
-    @Mapping(target = "estaEnPromociones", ignore = true)
     ArticuloInsumoDto toDTO(ArticuloInsumo source);
     ArticuloInsumo toEntity(ArticuloInsumoDto source);
     List<ArticuloInsumoDto> toDTOsList(List<ArticuloInsumo> source);
