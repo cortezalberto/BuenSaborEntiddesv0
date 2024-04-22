@@ -9,8 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IPromocionMapper extends IBaseMapper<Promocion, PromocionDto> {
-    @Mapping(target = "sucursales", ignore = true)
-    @Mapping(target = "articulos", ignore = true)
+
     PromocionDto toDTO(Promocion source);
     Promocion toEntity(PromocionDto source);
     List<PromocionDto> toDTOsList(List<Promocion> source);

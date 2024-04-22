@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IPedidoMapper extends IBaseMapper<Pedido,PedidoDto> {
-    @Mapping(target = "domicilio", ignore = true)
+
     PedidoDto toDTO(Pedido source);
     Pedido toEntity(PedidoDto source);
     List<PedidoDto> toDTOsList(List<Pedido> source);

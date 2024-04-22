@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IEmpresaMapper extends IBaseMapper<Empresa, EmpresaDto> {
-    @Mapping(target = "sucursales", ignore = true)
+
     EmpresaDto toDTO(Empresa source);
     Empresa toEntity(EmpresaDto source);
     List<EmpresaDto> toDTOsList(List<Empresa> source);

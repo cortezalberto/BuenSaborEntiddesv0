@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 public class CategoriaDto extends BaseDto{
     private String denominacion;
-    private Set<SucursalDto> sucursales = new HashSet<>();
     private Set<ArticuloDto> articulos = new HashSet<>();
     private Set<CategoriaDto> subCategorias = new HashSet<>();
 

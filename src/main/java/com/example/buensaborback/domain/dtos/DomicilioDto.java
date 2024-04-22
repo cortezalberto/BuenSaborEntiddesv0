@@ -16,5 +16,4 @@ public class DomicilioDto extends BaseDto{
     private Integer piso;
     private Integer nroDpto;
     private LocalidadDto localidad;
-    private Set<ClienteDto> clientes = new HashSet<>();
 }
