@@ -67,13 +67,7 @@ public class BuenSaborBackApplication {
 	private PromocionRepository promocionRepository;
 
 	@Autowired
-	private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
-
-	@Autowired
 	private PedidoRepository pedidoRepository;
-
-	@Autowired
-	private DetallePedidoRepository detallePedidoRepository;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -196,11 +190,6 @@ public class BuenSaborBackApplication {
 			ArticuloManufacturadoDetalle detalle3 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(350).build();
 			ArticuloManufacturadoDetalle detalle4 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(650).build();
 			ArticuloManufacturadoDetalle detalle5 = ArticuloManufacturadoDetalle.builder().articuloInsumo(tomate).cantidad(2).build();
-			articuloManufacturadoDetalleRepository.save(detalle1);
-			articuloManufacturadoDetalleRepository.save(detalle2);
-			articuloManufacturadoDetalleRepository.save(detalle3);
-			articuloManufacturadoDetalleRepository.save(detalle4);
-			articuloManufacturadoDetalleRepository.save(detalle5);
 
 			pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle1);
 			pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle2);

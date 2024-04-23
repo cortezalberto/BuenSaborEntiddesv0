@@ -26,4 +26,6 @@ public class PedidoDto extends BaseDto{
     private SucursalDto sucursal;
     private FacturaDto factura;
     private Set<DetallePedidoDto> detallePedidos = new HashSet<>();
+    private Long domicilioId; //Usado en el create
+    private Long sucursalId; //Usado en el create
 }

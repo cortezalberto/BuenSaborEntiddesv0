@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class AdviceController {
+
     private static final Logger logger = LoggerFactory.getLogger(AdviceController.class);
 
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ErrorDto> handleEmptyInput(Exception e){
-        String errorMsg = e.getClass() + " : " + e.getMessage();
+        String errorMsg = e.getClass().getSimpleName()+ " : " + e.getMessage();
         logger.error(errorMsg);
         return ResponseEntity.internalServerError()
                 .body(ErrorDto.builder()
