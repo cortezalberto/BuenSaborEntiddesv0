@@ -2,6 +2,7 @@ package com.example.buensaborback.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import java.util.HashSet;
 import java.util.Set;

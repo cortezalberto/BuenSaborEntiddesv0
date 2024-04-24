@@ -9,11 +9,9 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@ToString
 @Setter
-@SuperBuilder
+@ToString
 public class Articulo extends Base {
 
     protected String denominacion;
@@ -23,16 +21,18 @@ public class Articulo extends Base {
     //SE AGREGA EL JOIN COLUMN PARA QUE JPA NO CREE LA TABLA INTERMEDIA EN UNA RELACION ONE TO MANY
     //DE ESTA MANERA PONE EL FOREIGN KEY 'cliente_id' EN LA TABLA DE LOS MANY
     @JoinColumn(name = "articulo_id")
-    //SE AGREGA EL BUILDER.DEFAULT PARA QUE BUILDER NO SOBREESCRIBA LA INICIALIZACION DE LA LISTA
-    @Builder.Default
-    private Set<Imagen> imagenes = new HashSet<>();
+    private Set<Imagen> imagenes;
 
     @ManyToOne
     private UnidadMedida unidadMedida;
 
+
     public Articulo(String denominacion, Double precioVenta, UnidadMedida unidadMedida){
+        super();
         this.denominacion = denominacion;
         this.precioVenta = precioVenta;
         this.unidadMedida = unidadMedida;
+        this.imagenes = new HashSet<>();
     }
+
 }

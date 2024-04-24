@@ -7,9 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
 @ToString
 @Builder
+@Entity
 public class Imagen extends Base{
 
     private String url;
