@@ -1,6 +1,5 @@
 package com.example.buensaborback.business.services.impl;
 
-import com.example.buensaborback.BuenSaborBackApplication;
 import com.example.buensaborback.business.services.IBaseService;
 import com.example.buensaborback.domain.entities.Base;
 import com.example.buensaborback.repositories.BaseRepository;
@@ -29,20 +28,14 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable> im
 
     @Override
     public E getById(ID id) {
-        var optionalEntity = baseRepository.findById(id);
-
-        if (optionalEntity.isEmpty()){
-            logger.error("No se encontro una entidad con el id " + id);
-            throw new RuntimeException("No se encontro una entidad con el id " + id);
-        }
-        var entity = optionalEntity.get();
+        var entity = baseRepository.getById(id);
         logger.info("Obtenida entidad {}",entity);
         return entity;
     }
 
     @Override
     public List<E> getAll() {
-        var entities = baseRepository.findAll();
+        var entities = baseRepository.getAll();
         logger.info("Obtenidas entidades {}",entities);
         return entities;
     }
@@ -50,8 +43,8 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable> im
     @Override
     public void deleteById(ID id) {
         var entity = getById(id);
-        baseRepository.deleteById(id);
-        logger.info("Borrada entidad {}",entity);
+        baseRepository.delete(entity);
+        logger.info("Borrada logicamente entidad {}",entity);
     }
 
     @Override
